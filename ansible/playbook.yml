@@ -1,0 +1,36 @@
+---
+- name: Deploy Docker and Nginx
+  hosts: ec2_instances
+  become: true  # Run tasks with elevated privileges (sudo)
+
+  tasks:
+    - name: Update apt repositories
+      apt:
+        update_cache: yes
+      when: ansible_os_family == 'Debian'
+
+    - name: Install Docker
+      apt:
+        name: docker.io
+        state: present
+      when: ansible_os_family == 'Debian'
+
+    - name: Install Nginx
+      apt:
+        name: nginx
+        state: present
+      when: ansible_os_family == 'Debian'
+
+    - name: Start and enable Docker service
+      systemd:
+        name: docker
+        state: started
+        enabled: yes
+      when: ansible_os_family == 'Debian'
+
+    - name: Configure and start Nginx
+      systemd:
+        name: nginx
+        state: started
+        enabled: yes
+      when: ansible_os_family == 'Debian'
