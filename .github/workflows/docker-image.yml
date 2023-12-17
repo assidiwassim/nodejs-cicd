@@ -33,3 +33,15 @@ jobs:
       run: |
         docker tag nodejs-image ${{ secrets.DOCKER_USERNAME }}/nodejs-image:latest
         docker push ${{ secrets.DOCKER_USERNAME }}/nodejs-image:latest
+
+    - name: Deploy to EC2
+          uses: appleboy/ssh-action@master
+          with:
+            host: ${{ secrets.EC2_HOST }}
+            username: ${{ secrets.EC2_USERNAME }}
+            key: ${{ secrets.EC2_PRIVATE_KEY }}
+            script: |
+              docker pull ${{ secrets.DOCKER_USERNAME }}/nodejs-image:latest
+              docker stop nodejs-app || true
+              docker rm nodejs-app || true
+              docker run -d -p 80:3000 --name=nodejs-app ${{ secrets.DOCKER_USERNAME }}/nodejs-image:latest
