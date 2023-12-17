@@ -1,7 +1,6 @@
 version: '3.9' 
 name: nodejs-stack  
 services:
-
   nodejs-app: 
     container_name: nodejs-app  
     restart: always 
