@@ -53,7 +53,7 @@ jobs:
       run: ls ansible
 
     - name: Run Ansible Playbook
-      run: ansible-playbook -i ansible/inventory.ini ansible/deploy.yml
+      run: ansible-playbook -i ansible/inventory.ini ansible/deploy.yml -vvv
       env:
         ANSIBLE_HOST_KEY_CHECKING: false
         EC2_HOST: ${{ secrets.EC2_HOST }}

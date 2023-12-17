@@ -1,6 +1,6 @@
 ---
 - name: Deploy Docker and Nginx
-  hosts: your_target_servers
+  hosts: ec2_instance
   become: true  # Run tasks with elevated privileges (sudo)
 
   tasks:
