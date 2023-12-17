@@ -44,7 +44,6 @@ jobs:
         username: ${{ secrets.EC2_USERNAME }}
         key: ${{ secrets.EC2_PRIVATE_KEY }}
         script: |
-          sudo su
           docker pull ${{ secrets.DOCKER_USERNAME }}/nodejs-image:latest
           docker stop nodejs-app || true
           docker rm nodejs-app || true
