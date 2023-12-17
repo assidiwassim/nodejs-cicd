@@ -40,6 +40,9 @@ jobs:
 
     steps:
 
+    - name: Checkout Code 
+      uses: actions/checkout@v3
+
     - name: Set up Python and Install Ansible
       uses: actions/setup-python@v2
       with:
